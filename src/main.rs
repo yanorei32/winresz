@@ -1,5 +1,3 @@
-use std::ascii::AsciiExt;
-
 use clap::Parser;
 use winsafe::{
     co::{PROCESS, PROCESS_NAME, SWP},
