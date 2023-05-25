@@ -22,7 +22,7 @@ pub struct Cli {
     pub size: Option<Size>,
 }
 
-#[derive(Debug, Copy, Clone, Parser)]
+#[derive(Debug, Copy, Clone, Parser, Default)]
 pub struct Size {
     pub x: usize,
     pub y: usize,
@@ -63,12 +63,6 @@ impl From<Size> for SIZE {
             cx: v.x as i32,
             cy: v.y as i32,
         }
-    }
-}
-
-impl Default for Size {
-    fn default() -> Self {
-        Self { x: 0, y: 0 }
     }
 }
 
