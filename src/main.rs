@@ -38,45 +38,33 @@ fn filter_target_windows(hwnd: &HWND, q: &TargetInformation) -> bool {
     true
 }
 
-fn window_callback(hwnd: HWND, op: &Commands) {
-    let t = match op {
-        Commands::Get { target } => target,
-        Commands::Set {
-            target,
-            resolution: _,
-        } => target,
-    };
-
-    if !filter_target_windows(&hwnd, t) {
+fn window_callback(hwnd: HWND, op: &Cli) {
+    if !filter_target_windows(&hwnd, &op.target) {
         return;
     }
 
     let client_size = Size::from(hwnd.GetClientRect().unwrap());
 
-    match op {
-        Commands::Get { target: _ } => {
-            println!("{}", client_size - t.offset);
-        }
-        Commands::Set {
-            target: _,
-            resolution,
-        } => {
-            let window_size = Size::from(hwnd.GetWindowRect().unwrap());
-            let border = window_size - client_size;
+    let Some(size) = op.size else {
+        println!("{}\t", client_size - op.target.offset);
+        return;
+    };
 
-            hwnd.SetWindowPos(
-                HwndPlace::None,
-                POINT::new(0, 0),
-                (*resolution + t.offset + border).into(),
-                SWP::NOMOVE,
-            )
-            .unwrap();
-        }
-    }
+    let window_size = Size::from(hwnd.GetWindowRect().unwrap());
+
+    let border = window_size - client_size;
+
+    hwnd.SetWindowPos(
+        HwndPlace::None,
+        POINT::new(0, 0),
+        (size + op.target.offset + border).into(),
+        SWP::NOMOVE,
+    )
+    .unwrap();
 }
 
 fn main() {
-    let c = Cli::parse().command;
+    let c = Cli::parse();
     EnumWindows(|hwnd: HWND| -> bool {
         window_callback(hwnd, &c);
         true

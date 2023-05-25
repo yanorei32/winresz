@@ -1,4 +1,4 @@
-use clap::{Args, Parser, Subcommand};
+use clap::{Args, Parser};
 use std::fmt::{self, Display};
 use std::io::{Error, ErrorKind};
 use std::ops::{Add, Sub};
@@ -6,32 +6,20 @@ use winsafe::{RECT, SIZE};
 
 #[derive(Debug, Clone, Args)]
 pub struct TargetInformation {
-    #[arg(short, long)]
+    #[arg(short, long, help = "Filter by binary path")]
     pub path_endswith: Vec<String>,
-    #[arg(short, long)]
+    #[arg(short, long, help = "Filter by title")]
     pub title_contains: Vec<String>,
-    #[arg(short, long, value_parser = parse_size, default_value_t = Size::default())]
+    #[arg(short, long, value_parser = parse_size, default_value_t = Size::default(), help = "Additional offset for window")]
     pub offset: Size,
-}
-
-#[derive(Debug, Clone, Subcommand)]
-pub enum Commands {
-    Get {
-        #[command(flatten)]
-        target: TargetInformation,
-    },
-    Set {
-        #[command(flatten)]
-        target: TargetInformation,
-        #[arg(value_parser = parse_size)]
-        resolution: Size,
-    },
 }
 
 #[derive(Debug, Parser)]
 pub struct Cli {
-    #[command(subcommand)]
-    pub command: Commands,
+    #[command(flatten)]
+    pub target: TargetInformation,
+    #[arg(value_parser = parse_size, help = "Set the window size if it's set.")]
+    pub size: Option<Size>,
 }
 
 #[derive(Debug, Copy, Clone, Parser)]
