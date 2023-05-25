@@ -1,3 +1,5 @@
+use std::ascii::AsciiExt;
+
 use clap::Parser;
 use winsafe::{
     co::{PROCESS, PROCESS_NAME, SWP},
@@ -14,7 +16,10 @@ fn filter_target_windows(hwnd: &HWND, q: &TargetInformation) -> bool {
             return false;
         };
 
-        if q.title_contains.iter().all(|s| !title.contains(s)) {
+        if q.title_contains
+            .iter()
+            .all(|s| !title.to_ascii_lowercase().contains(&s.to_ascii_lowercase()))
+        {
             return false;
         }
     }
@@ -30,7 +35,10 @@ fn filter_target_windows(hwnd: &HWND, q: &TargetInformation) -> bool {
             return false;
         };
 
-        if q.path_endswith.iter().all(|s| !path.ends_with(s)) {
+        if q.path_endswith
+            .iter()
+            .all(|s| !path.to_ascii_lowercase().ends_with(&s.to_ascii_lowercase()))
+        {
             return false;
         }
     }
