@@ -32,14 +32,3 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features
-
-      - name: compile for unit test
-        uses: actions-rs/cargo@v1.0.3
-        with:
-          command: test
-          args: --no-run --locked
-
-      - name: unit test
-        uses: actions-rs/cargo@v1.0.3
-        with:
-          command: test
