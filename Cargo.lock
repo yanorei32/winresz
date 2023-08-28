@@ -232,6 +232,6 @@ dependencies = [
 
 [[package]]
 name = "winsafe"
-version = "0.0.15"
+version = "0.0.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62a4f20d0e60f34bfbb2624564d0bfda0a6eaee8f7f4494e5c3c883c3a62fdd2"
+checksum = "91d454b73a81f11bccf441f4d1e491ee70d804683df8a4056777cf9043f8daa1"
