@@ -18,11 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3.5.3
 
+      - run: |
+          sudo apt-get update -y
+          sudo apt-get install -y gcc-mingw-w64-x86-64
+
       - uses: actions-rs/toolchain@v1.0.7
         with:
           toolchain: stable
           components: clippy
           override: true
+          target: x86_64-pc-windows-gnu
 
       - name: cache dependencies
         uses: Swatinem/rust-cache@v2.2.0
