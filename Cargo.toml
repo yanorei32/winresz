@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 winsafe = { version = "0.0.20", features = ["user", "kernel"] }
-clap = { version = "4.5.3", features = ["derive"] }
+clap = { version = "4.5.4", features = ["derive"] }
 
 [profile.release]
 opt-level = "z"
