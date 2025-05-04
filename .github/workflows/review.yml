@@ -22,7 +22,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y gcc-mingw-w64-x86-64
 
-      - uses: actions-rs/toolchain@v1.0.7
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
           components: clippy
@@ -33,7 +33,6 @@ jobs:
         uses: Swatinem/rust-cache@v2.7.8
 
       - name: clippy check
-        uses: actions-rs/clippy-check@v1.0.7
+        uses: clechasseur/rs-clippy-check@v4.0.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features

@@ -19,7 +19,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y gcc-mingw-w64-x86-64
 
-      - uses: dtolnay/rust-toolchain@master
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
           target: x86_64-pc-windows-gnu
@@ -28,18 +28,17 @@ jobs:
         uses: Swatinem/rust-cache@v2.7.8
 
       - name: clippy check
-        uses: actions-rs/clippy-check@v1.0.7
+        uses: clechasseur/rs-clippy-check@v4.0.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features
 
       - name: install cargo-license
-        uses: actions-rs/cargo@v1.0.3
+        uses: clechasseur/rs-cargo@v3.0.3
         with:
           command: install
           args: cargo-license
 
-      - uses: actions-rs/cargo@v1.0.3
+      - uses: clechasseur/rs-cargo@v3.0.3
         with:
           command: build
           args: --release --target x86_64-pc-windows-gnu
