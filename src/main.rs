@@ -1,7 +1,6 @@
 use clap::Parser;
 use winsafe::{
     co::{PROCESS, PROCESS_NAME, SWP},
-    prelude::*,
     EnumWindows, HwndPlace, HPROCESS, HWND, POINT,
 };
 
@@ -62,7 +61,7 @@ fn window_callback(hwnd: HWND, op: &Cli) {
 
     hwnd.SetWindowPos(
         HwndPlace::None,
-        POINT::new(0, 0),
+        POINT::with(0, 0),
         (size + op.target.offset + border).into(),
         SWP::NOMOVE,
     )
