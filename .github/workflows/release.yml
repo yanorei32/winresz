@@ -33,12 +33,12 @@ jobs:
           args: --all-features
 
       - name: install cargo-license
-        uses: clechasseur/rs-cargo@v3.0.6
+        uses: clechasseur/rs-cargo@v4.0.0
         with:
           command: install
           args: cargo-license
 
-      - uses: clechasseur/rs-cargo@v3.0.6
+      - uses: clechasseur/rs-cargo@v4.0.0
         with:
           command: build
           args: --release --target x86_64-pc-windows-gnu
