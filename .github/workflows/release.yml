@@ -64,7 +64,7 @@ jobs:
           zip -r winresz.zip winresz
 
       - name: pre-release
-        uses: softprops/action-gh-release@v2.4.0
+        uses: softprops/action-gh-release@v2.4.1
         if: "! startsWith(github.ref, 'refs/tags/')"
         with:
           tag_name: "latest"
@@ -74,7 +74,7 @@ jobs:
             winresz.zip
 
       - name: tagged-release
-        uses: softprops/action-gh-release@v2.4.0
+        uses: softprops/action-gh-release@v2.4.1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
