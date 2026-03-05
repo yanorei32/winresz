@@ -28,7 +28,7 @@ jobs:
         uses: Swatinem/rust-cache@v2.8.2
 
       - name: clippy check
-        uses: clechasseur/rs-clippy-check@v5.0.2
+        uses: clechasseur/rs-clippy-check@v6.0.0
         with:
           args: --all-features
 
