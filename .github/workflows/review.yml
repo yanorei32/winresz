@@ -33,6 +33,6 @@ jobs:
         uses: Swatinem/rust-cache@v2.9.1
 
       - name: clippy check
-        uses: clechasseur/rs-clippy-check@v6.0.2
+        uses: clechasseur/rs-clippy-check@v6.0.3
         with:
           args: --all-features
